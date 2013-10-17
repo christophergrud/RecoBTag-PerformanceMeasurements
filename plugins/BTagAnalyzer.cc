@@ -356,7 +356,7 @@ void BTagAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
         }
       }
 
-//$$
+
       if ( (ID/100)%10 == 5 || (ID/1000)%10 == 5 ) AreBHadrons = true;
 //$$
 //       // Primary b Hadrons
@@ -955,6 +955,46 @@ void BTagAnalyzer::processJets(const edm::Handle<PatJetCollection>& jetsColl, co
       if ( flavour >= 1 && flavour <= 3 ) flavour = 1;
     }
 
+    const reco::GenParticle* parton = pjet->genParton();
+    if (parton != NULL) {
+
+      const reco::Candidate* genCand = parton;
+      if (genCand != NULL && genCand->numberOfMothers() == 1) {  
+
+        const reco::Candidate* genMom = genCand->mother(0); 
+        JetInfo[iJetColl].Jet_motherId    [JetInfo[iJetColl].nJet] = genMom->pdgId()  ; 
+        JetInfo[iJetColl].Jet_motherMass  [JetInfo[iJetColl].nJet] = genMom->mass()   ; 
+        JetInfo[iJetColl].Jet_motherEnergy[JetInfo[iJetColl].nJet] = genMom->energy() ; 
+        JetInfo[iJetColl].Jet_motherPt    [JetInfo[iJetColl].nJet] = genMom->pt()     ; 
+        JetInfo[iJetColl].Jet_motherEta   [JetInfo[iJetColl].nJet] = genMom->eta()    ; 
+        JetInfo[iJetColl].Jet_motherPhi   [JetInfo[iJetColl].nJet] = genMom->phi()    ; 
+
+        if (genMom != NULL && genMom->numberOfMothers() == 1) { 
+          const reco::Candidate* genGrandmom = genMom->mother() ; 
+
+          JetInfo[iJetColl].Jet_grandmotherId    [JetInfo[iJetColl].nJet] = genGrandmom->pdgId()  ; 
+          JetInfo[iJetColl].Jet_grandmotherMass  [JetInfo[iJetColl].nJet] = genGrandmom->mass()   ; 
+          JetInfo[iJetColl].Jet_grandmotherEnergy[JetInfo[iJetColl].nJet] = genGrandmom->energy() ; 
+          JetInfo[iJetColl].Jet_grandmotherPt    [JetInfo[iJetColl].nJet] = genGrandmom->pt()     ; 
+          JetInfo[iJetColl].Jet_grandmotherEta   [JetInfo[iJetColl].nJet] = genGrandmom->eta()    ; 
+          JetInfo[iJetColl].Jet_grandmotherPhi   [JetInfo[iJetColl].nJet] = genGrandmom->phi()    ; 
+
+          if (genGrandmom != NULL && genGrandmom->numberOfMothers() == 1) { 
+            const reco::Candidate* genGreatgrandmom = genMom->mother() ; 
+
+            JetInfo[iJetColl].Jet_greatgrandmotherId    [JetInfo[iJetColl].nJet] = genGreatgrandmom->pdgId()  ; 
+            JetInfo[iJetColl].Jet_greatgrandmotherMass  [JetInfo[iJetColl].nJet] = genGreatgrandmom->mass()   ; 
+            JetInfo[iJetColl].Jet_greatgrandmotherEnergy[JetInfo[iJetColl].nJet] = genGreatgrandmom->energy() ; 
+            JetInfo[iJetColl].Jet_greatgrandmotherPt    [JetInfo[iJetColl].nJet] = genGreatgrandmom->pt()     ; 
+            JetInfo[iJetColl].Jet_greatgrandmotherEta   [JetInfo[iJetColl].nJet] = genGreatgrandmom->eta()    ; 
+            JetInfo[iJetColl].Jet_greatgrandmotherPhi   [JetInfo[iJetColl].nJet] = genGreatgrandmom->phi()    ; 
+
+          }
+
+        }
+      }
+    }
+
     JetInfo[iJetColl].Jet_flavour[JetInfo[iJetColl].nJet] = flavour;
     JetInfo[iJetColl].Jet_eta[JetInfo[iJetColl].nJet]     = pjet->eta();
     JetInfo[iJetColl].Jet_phi[JetInfo[iJetColl].nJet]     = pjet->phi();
@@ -992,9 +1032,9 @@ void BTagAnalyzer::processJets(const edm::Handle<PatJetCollection>& jetsColl, co
       }
     }
 
-//$$$$
+    //$$$$
     int subjet1Idx = -1, subjet2Idx = -1;
-//$$$$
+    //$$$$
     if ( runSubJets_ && iJetColl == 1 )
     {
       // N-subjettiness
@@ -1022,7 +1062,7 @@ void BTagAnalyzer::processJets(const edm::Handle<PatJetCollection>& jetsColl, co
       JetInfo[iJetColl].Jet_phiPruned[JetInfo[iJetColl].nJet]  = fatJetToPrunedFatJetMap.find(&(*pjet))->second->phi();
       JetInfo[iJetColl].Jet_massPruned[JetInfo[iJetColl].nJet] = fatJetToPrunedFatJetMap.find(&(*pjet))->second->mass();
 
-//$$$$      int subjet1Idx=-1, subjet2Idx=-1;
+      //$$$$      int subjet1Idx=-1, subjet2Idx=-1;
       for( PatJetCollection::const_iterator jIt = jetsColl2->begin(); jIt != jetsColl2->end(); ++jIt )
       {
         if( &(*jIt) == fatJetToPrunedFatJetMap.find(&(*pjet))->second->daughter(0) ) subjet1Idx = int( jIt - jetsColl2->begin() );
@@ -1083,11 +1123,11 @@ void BTagAnalyzer::processJets(const edm::Handle<PatJetCollection>& jetsColl, co
     JetInfo[iJetColl].Jet_nFirstTrkInc[JetInfo[iJetColl].nJet] = JetInfo[iJetColl].nTrkInc;
     int k=0;
 
-//$$
+    //$$
     int nseltracks = 0;
-//$$$$
+    //$$$$
     int nsharedtracks = 0;
-//$$$$
+    //$$$$
 
     unsigned int trackSize = selected_tracks.size();
     if ( !use_selected_tracks_ ) trackSize = no_sel_tracks.size();
@@ -1128,12 +1168,12 @@ void BTagAnalyzer::processJets(const edm::Handle<PatJetCollection>& jetsColl, co
       bool pass_cut_trk = false;
       if (std::fabs(distJetAxis) < 0.07 && decayLength < 5.0) pass_cut_trk = true;
 
-//$$
+      //$$
       if (std::fabs(distJetAxis) < 0.07 && decayLength < 5.0
-                                        && deltaR < 0.3) nseltracks++;
-//$$
+          && deltaR < 0.3) nseltracks++;
+      //$$
 
-//$$$$
+      //$$$$
       if ( runSubJets_ && iJetColl == 1 && pass_cut_trk && subjet1Idx >= 0 && subjet2Idx >= 0 ) {
 
         deta = ptrack.eta() - JetInfo[0].Jet_eta[subjet1Idx];
@@ -1148,7 +1188,7 @@ void BTagAnalyzer::processJets(const edm::Handle<PatJetCollection>& jetsColl, co
 
         if ( dR1 < 0.3 && dR2 < 0.3 ) nsharedtracks++;
       }
-//$$$$
+      //$$$$
 
       // track selection
       if ( (use_selected_tracks_ && pass_cut_trk) ||  !use_selected_tracks_) {
@@ -1369,9 +1409,9 @@ void BTagAnalyzer::processJets(const edm::Handle<PatJetCollection>& jetsColl, co
             && ptrack.trackerExpectedHitsOuter().numberOfHits() <= 2
             && ptrack.dz()-(*pv).z() < 1. ) {
 
-//$$
+          //$$
           if ( iJetColl != 1 ) {
-//$$
+            //$$
             if ( use_selected_tracks_ ) {
               JetInfo[iJetColl].TrkInc_IP[JetInfo[iJetColl].nTrkInc]    = pjet->tagInfoTrackIP("impactParameter")->impactParameterData()[k].ip3d.value();
               JetInfo[iJetColl].TrkInc_IPsig[JetInfo[iJetColl].nTrkInc] = pjet->tagInfoTrackIP("impactParameter")->impactParameterData()[k].ip3d.significance();
@@ -1382,21 +1422,21 @@ void BTagAnalyzer::processJets(const edm::Handle<PatJetCollection>& jetsColl, co
             JetInfo[iJetColl].TrkInc_ptrel[JetInfo[iJetColl].nTrkInc] = calculPtRel( ptrack , *pjet);
 
             ++JetInfo[iJetColl].nTrkInc;
-//$$
+            //$$
           }
-//$$
+          //$$
         }
       }
       ++k;
 
     } //// end loop on tracks
 
-//$$
+    //$$
     JetInfo[iJetColl].Jet_nseltracks[JetInfo[iJetColl].nJet] = nseltracks;
-//$$$$
+    //$$$$
     if ( runSubJets_ && iJetColl == 1 )
       JetInfo[iJetColl].Jet_nsharedtracks[JetInfo[iJetColl].nJet] = nsharedtracks;
-//$$$$
+    //$$$$
 
     JetInfo[iJetColl].Jet_nLastTrack[JetInfo[iJetColl].nJet]   = JetInfo[iJetColl].nTrack;
     JetInfo[iJetColl].Jet_nLastTrkInc[JetInfo[iJetColl].nJet]  = JetInfo[iJetColl].nTrkInc;
@@ -1778,9 +1818,9 @@ void BTagAnalyzer::processJets(const edm::Handle<PatJetCollection>& jetsColl, co
     }
     JetInfo[iJetColl].Jet_SvxMass[JetInfo[iJetColl].nJet] = SVmass;
 
-//$$    if ( produceJetProbaTree_  &&  JetInfo[iJetColl].Jet_SV_multi[JetInfo[iJetColl].nJet]> 0) {
+    //$$    if ( produceJetProbaTree_  &&  JetInfo[iJetColl].Jet_SV_multi[JetInfo[iJetColl].nJet]> 0) {
     if ( ( produceJetProbaTree_ || use_selected_tracks_ )
-         && JetInfo[iJetColl].Jet_SV_multi[JetInfo[iJetColl].nJet] > 0) {
+        && JetInfo[iJetColl].Jet_SV_multi[JetInfo[iJetColl].nJet] > 0) {
 
       JetInfo[iJetColl].SV_x[JetInfo[iJetColl].nSV]    = pjet->tagInfoSecondaryVertex("secondaryVertex")->secondaryVertex(0).x();
       JetInfo[iJetColl].SV_y[JetInfo[iJetColl].nSV]    = pjet->tagInfoSecondaryVertex("secondaryVertex")->secondaryVertex(0).y();
@@ -2133,381 +2173,381 @@ void BTagAnalyzer::processJets(const edm::Handle<PatJetCollection>& jetsColl, co
   Histos[iJetColl]->hData_NJets->Fill( numjet );
 
   return;
-} // BTagAnalyzer:: processJets
+  } // BTagAnalyzer:: processJets
 
 
-float BTagAnalyzer::calculPtRel(const reco::Track& theMuon, const pat::Jet& theJet )
-{
-  double pmu = TMath::Sqrt( theMuon.px()*theMuon.px() + theMuon.py()*theMuon.py()  + theMuon.pz()*theMuon.pz() );
+  float BTagAnalyzer::calculPtRel(const reco::Track& theMuon, const pat::Jet& theJet )
+  {
+    double pmu = TMath::Sqrt( theMuon.px()*theMuon.px() + theMuon.py()*theMuon.py()  + theMuon.pz()*theMuon.pz() );
 
-  double jetpx = 0 ;
-  double jetpy = 0 ;
-  double jetpz = 0 ;
+    double jetpx = 0 ;
+    double jetpy = 0 ;
+    double jetpz = 0 ;
 
-  if( theJet.isCaloJet() ){
-    jetpx = theJet.px() + theMuon.px();
-    jetpy = theJet.py() + theMuon.py();
-    jetpz = theJet.pz() + theMuon.pz();
-  }else{
-    jetpx = theJet.px();
-    jetpy = theJet.py();
-    jetpz = theJet.pz();
-  }
-
-  double jetp = TMath::Sqrt(jetpx*jetpx + jetpy*jetpy + jetpz*jetpz);
-
-  double ptrel  = ( jetpx * theMuon.px()  + jetpy * theMuon.py() + jetpz * theMuon.pz() ) / jetp;
-  ptrel = TMath::Sqrt( pmu * pmu  - ptrel * ptrel );
-
-  return ptrel;
-}
-
-
-void BTagAnalyzer::setTracksPV( const reco::Vertex *pv, const bool isPV, const int iJetColl )
-{
-  for (reco::Vertex::trackRef_iterator itt = (*pv).tracks_begin(); itt != (*pv).tracks_end(); ++itt) {
-    for (int i=0; i<JetInfo[iJetColl].nTrack; ++i) {
-      if ( fabs( (&**itt)->pt() - JetInfo[iJetColl].Track_pt[i] )  < 1.e-5 ) {
-        if ( isPV ) {
-          JetInfo[iJetColl].Track_PV[i] = EventInfo.nPV + 1;
-          JetInfo[iJetColl].Track_PVweight[i] = (*pv).trackWeight(*itt);
-        }
-        else {
-          JetInfo[iJetColl].Track_isfromSV[i]= 1;
-          JetInfo[iJetColl].Track_SV[i] = JetInfo[iJetColl].nSV + 1;
-          JetInfo[iJetColl].Track_SVweight[i] = (*pv).trackWeight(*itt);
-          //   std::cout << " track " << i << " at SV " << JetInfo[iJetColl].Track_SV[i] << std::endl;
-        }
-      }
-    }
-  }
-}
-
-
-// ------------ method called once each job just before starting event loop  ------------
-void BTagAnalyzer::beginJob() {
-  //cat 0
-  cat0.etaMax = 2.5;
-  cat0.etaMin = 0;
-  cat0.nHitsMax= 50;
-  cat0.nHitsMin= 8;
-  cat0.nPixelHitsMax = 1;
-  cat0.nPixelHitsMin = 1;
-  cat0.pMax= 5000;
-  cat0.pMin= 0;
-  cat0.chiMin= 0;
-  cat0.chiMax= 5;
-  cat0.withFirstPixel = 0;
-
-  //cat 1
-  cat1.etaMax        = 2.5;
-  cat1.etaMin        = 0;
-  cat1.nHitsMax      = 50;
-  cat1.nHitsMin      = 8;
-  cat1.nPixelHitsMax = 8;
-  cat1.nPixelHitsMin = 2;
-  cat1.pMax          = 5000;
-  cat1.pMin          = 0;
-  cat1.chiMin        = 2.5;
-  cat1.chiMax        = 5;
-  cat1.withFirstPixel = 0;
-
-  //cat 2
-  cat2.etaMax        = 0.8;
-  cat2.etaMin        = 0;
-  cat2.nHitsMax      = 50;
-  cat2.nHitsMin      = 8;
-  cat2.nPixelHitsMax = 8;
-  cat2.nPixelHitsMin = 3;
-  cat2.pMax          = 8;
-  cat2.pMin          = 0;
-  cat2.chiMin        = 0;
-  cat2.chiMax        = 2.5;
-  cat2.withFirstPixel = 0;
-
-  //cat 3
-  cat3.etaMax        = 1.6;
-  cat3.etaMin        = 0.8;
-  cat3.nHitsMax      = 50;
-  cat3.nHitsMin      = 8;
-  cat3.nPixelHitsMax = 8;
-  cat3.nPixelHitsMin = 3;
-  cat3.pMax          = 8;
-  cat3.pMin          = 0;
-  cat3.chiMin        = 0;
-  cat3.chiMax        = 2.5;
-  cat3.withFirstPixel = 0;
-
-  //cat 4
-  cat4.etaMax        = 2.5;
-  cat4.etaMin        = 1.6;
-  cat4.nHitsMax      = 50;
-  cat4.nHitsMin      = 8;
-  cat4.nPixelHitsMax = 8;
-  cat4.nPixelHitsMin = 3;
-  cat4.pMax          = 8;
-  cat4.pMin          = 0;
-  cat4.chiMin        = 0;
-  cat4.chiMax        = 2.5;
-  cat4.withFirstPixel = 0;
-
-  //cat 5
-  cat5.etaMax        = 2.5;
-  cat5.etaMin        = 0;
-  cat5.nHitsMax      = 50;
-  cat5.nHitsMin      = 8;
-  cat5.nPixelHitsMax = 8;
-  cat5.nPixelHitsMin = 2;
-  cat5.pMax          = 8;
-  cat5.pMin          = 0;
-  cat5.chiMin        = 0;
-  cat5.chiMax        = 2.5;
-  cat5.withFirstPixel = 0;
-
-  //cat 6
-  cat6.etaMax        = 0.8;
-  cat6.etaMin        = 0;
-  cat6.nHitsMax      = 50;
-  cat6.nHitsMin      = 8;
-  cat6.nPixelHitsMax = 8;
-  cat6.nPixelHitsMin = 3;
-  cat6.pMax          = 5000;
-  cat6.pMin          = 8;
-  cat6.chiMin        = 0;
-  cat6.chiMax        = 2.5;
-  cat6.withFirstPixel = 0;
-
-  //cat 7
-  cat7.etaMax        = 1.6;
-  cat7.etaMin        = 0.8;
-  cat7.nHitsMax      = 50;
-  cat7.nHitsMin      = 8;
-  cat7.nPixelHitsMax = 8;
-  cat7.nPixelHitsMin = 3;
-  cat7.pMax          = 5000;
-  cat7.pMin          = 8;
-  cat7.chiMin        = 0;
-  cat7.chiMax        = 2.5;
-  cat7.withFirstPixel = 0;
-
-  //cat 8
-  cat8.etaMax        = 2.5;
-  cat8.etaMin        = 1.6;
-  cat8.nHitsMax      = 50;
-  cat8.nHitsMin      = 8;
-  cat8.nPixelHitsMax = 8;
-  cat8.nPixelHitsMin = 3;
-  cat8.pMax          = 5000;
-  cat8.pMin          = 8;
-  cat8.chiMin        = 0;
-  cat8.chiMax        = 2.5;
-  cat8.withFirstPixel = 0;
-
-  //cat 9
-  cat9.etaMax        = 2.5;
-  cat9.etaMin        = 0;
-  cat9.nHitsMax      = 50;
-  cat9.nHitsMin      = 8;
-  cat9.nPixelHitsMax = 2;
-  cat9.nPixelHitsMin = 2;
-  cat9.pMax          = 5000;
-  cat9.pMin          = 8;
-  cat9.chiMin        = 0;
-  cat9.chiMax        = 2.5;
-  cat9.withFirstPixel = 0;
-}
-
-
-// ------------ method called once each job just after ending the event loop  ------------
-void BTagAnalyzer::endJob() {
-}
-
-
-std::vector< float > BTagAnalyzer::getTrackProbabilies(std::vector< float > v, const int ipType){
-
-  std::vector< float > vectTrackProba;
-
-  for (std::vector<float>::const_iterator q = v.begin(); q != v.end(); ++q) {
-    //positives and negatives tracks
-    double p3d = 0;
-    if(ipType == 0){
-      if ( *q>=0){p3d= (*q)/2.;}else{p3d=1.+(*q)/2.;}
-      //if(-log(p3d)> 5) p3d=exp(-5.0);
-      vectTrackProba.push_back(p3d);
+    if( theJet.isCaloJet() ){
+      jetpx = theJet.px() + theMuon.px();
+      jetpy = theJet.py() + theMuon.py();
+      jetpz = theJet.pz() + theMuon.pz();
+    }else{
+      jetpx = theJet.px();
+      jetpy = theJet.py();
+      jetpz = theJet.pz();
     }
 
-    //positives tracks only
-    if(ipType == 1 && *q >=0 ){
-      vectTrackProba.push_back(*q);
-    }
+    double jetp = TMath::Sqrt(jetpx*jetpx + jetpy*jetpy + jetpz*jetpz);
 
-    //negatives tracks only
-    if(ipType == 2 && *q <0){
-      vectTrackProba.push_back(-(*q));
-    }
+    double ptrel  = ( jetpx * theMuon.px()  + jetpy * theMuon.py() + jetpz * theMuon.pz() ) / jetp;
+    ptrel = TMath::Sqrt( pmu * pmu  - ptrel * ptrel );
+
+    return ptrel;
   }
 
-  return vectTrackProba;
-}
 
-
-double BTagAnalyzer::calculProbability(std::vector< float > v) {
-
-  int ngoodtracks=v.size();
-  double SumJet=0.;
-  double m_minTrackProb = 0.005;
-  for (std::vector<float>::const_iterator q = v.begin(); q != v.end(); ++q) {
-    SumJet += (*q>m_minTrackProb)?log(*q):log(m_minTrackProb);
-  }
-
-  double ProbJet;
-  double Loginvlog = 0;
-
-  if ( SumJet < 0. ) {
-    if ( ngoodtracks >= 2 ) {
-      Loginvlog = log(-SumJet);
-    }
-    double Prob = 1.;
-    double lfact = 1.;
-    for (int l=1; l!=ngoodtracks; ++l) {
-      lfact *= l;
-      Prob += exp( l*Loginvlog-log(1.*lfact) );
-    }
-    double LogProb = log(Prob);
-    ProbJet = std::min(exp( std::max(LogProb+SumJet,-30.) ), 1.);
-  } else {
-    ProbJet = 1.;
-  }
-  return ProbJet;
-}
-
-
-bool BTagAnalyzer::findCat(const reco::Track* track, CategoryFinder& d) {
-  //int numcat=-1;
-
-  double   p = track->p();
-  double eta = track->eta();
-  double chi = track->normalizedChi2();
-  int   nhit = track->numberOfValidHits();
-  int   npix = track->hitPattern().numberOfValidPixelHits();
-
-  bool result = ( p > d.pMin  &&  p  < d.pMax		  &&
-      fabs(eta) > d.etaMin    &&  fabs(eta) < d.etaMax    &&
-      nhit >= d.nHitsMin      &&  nhit <= d.nHitsMax	  &&
-      npix >= d.nPixelHitsMin &&  npix <= d.nPixelHitsMax &&
-      chi >= d.chiMin         &&  chi <= d.chiMax );
-
-  return result;
-}
-
-
-int BTagAnalyzer::matchMuon(const edm::RefToBase<reco::Track>& theMuon, const edm::View<reco::Muon>& muons ){
-  double small = 1.e-3;
-  int matchedMu = -1;
-  for(unsigned int i=0; i<muons.size(); ++i){
-    double muonpt = -10000;
-    if( muons[i].isGlobalMuon() )                               muonpt = muons[i].globalTrack()->pt() ;
-    if(!muons[i].isGlobalMuon() &&  muons[i].isTrackerMuon())   muonpt = muons[i].innerTrack()->pt() ;
-
-    if ( fabs(theMuon->pt() - muonpt )  < small  ){ matchedMu = i; }
-
-  }
-  return matchedMu;
-}
-
-
-std::vector<BTagAnalyzer::simPrimaryVertex> BTagAnalyzer::getSimPVs(const edm::Handle<edm::HepMCProduct>& evtMC){
-
-  std::vector<BTagAnalyzer::simPrimaryVertex> simpv;
-  const HepMC::GenEvent* evt=evtMC->GetEvent();
-  if (evt) {
-
-    for ( HepMC::GenEvent::vertex_const_iterator vitr= evt->vertices_begin();
-        vitr != evt->vertices_end(); ++vitr ) { // loop for vertex ...
-      HepMC::FourVector pos = (*vitr)->position();
-      //HepLorentzVector pos = (*vitr)->position();
-
-      bool hasMotherVertex=false;
-
-      for ( HepMC::GenVertex::particle_iterator
-          mother  = (*vitr)->particles_begin(HepMC::parents);
-          mother != (*vitr)->particles_end(HepMC::parents);
-          ++mother ) {
-        HepMC::GenVertex * mv=(*mother)->production_vertex();
-        if (mv) {
-          hasMotherVertex=true;
-          break; //if verbose_, print all particles of gen vertices
+  void BTagAnalyzer::setTracksPV( const reco::Vertex *pv, const bool isPV, const int iJetColl )
+  {
+    for (reco::Vertex::trackRef_iterator itt = (*pv).tracks_begin(); itt != (*pv).tracks_end(); ++itt) {
+      for (int i=0; i<JetInfo[iJetColl].nTrack; ++i) {
+        if ( fabs( (&**itt)->pt() - JetInfo[iJetColl].Track_pt[i] )  < 1.e-5 ) {
+          if ( isPV ) {
+            JetInfo[iJetColl].Track_PV[i] = EventInfo.nPV + 1;
+            JetInfo[iJetColl].Track_PVweight[i] = (*pv).trackWeight(*itt);
+          }
+          else {
+            JetInfo[iJetColl].Track_isfromSV[i]= 1;
+            JetInfo[iJetColl].Track_SV[i] = JetInfo[iJetColl].nSV + 1;
+            JetInfo[iJetColl].Track_SVweight[i] = (*pv).trackWeight(*itt);
+            //   std::cout << " track " << i << " at SV " << JetInfo[iJetColl].Track_SV[i] << std::endl;
+          }
         }
       }
+    }
+  }
 
-      if (hasMotherVertex) {continue;}
 
-      // could be a new vertex, check  all primaries found so far to avoid multiple entries
-      const double mm=0.1;
-      simPrimaryVertex sv(pos.x()*mm,pos.y()*mm,pos.z()*mm);
-      simPrimaryVertex *vp=NULL;  // will become non-NULL if a vertex is found and then point to it
-      for (std::vector<simPrimaryVertex>::iterator v0=simpv.begin();
-          v0!=simpv.end(); ++v0) {
-        if ( (fabs(sv.x-v0->x)<1e-5) && (fabs(sv.y-v0->y)<1e-5)
-            && (fabs(sv.z-v0->z)<1e-5) ) {
-          vp=&(*v0);
+  // ------------ method called once each job just before starting event loop  ------------
+  void BTagAnalyzer::beginJob() {
+    //cat 0
+    cat0.etaMax = 2.5;
+    cat0.etaMin = 0;
+    cat0.nHitsMax= 50;
+    cat0.nHitsMin= 8;
+    cat0.nPixelHitsMax = 1;
+    cat0.nPixelHitsMin = 1;
+    cat0.pMax= 5000;
+    cat0.pMin= 0;
+    cat0.chiMin= 0;
+    cat0.chiMax= 5;
+    cat0.withFirstPixel = 0;
+
+    //cat 1
+    cat1.etaMax        = 2.5;
+    cat1.etaMin        = 0;
+    cat1.nHitsMax      = 50;
+    cat1.nHitsMin      = 8;
+    cat1.nPixelHitsMax = 8;
+    cat1.nPixelHitsMin = 2;
+    cat1.pMax          = 5000;
+    cat1.pMin          = 0;
+    cat1.chiMin        = 2.5;
+    cat1.chiMax        = 5;
+    cat1.withFirstPixel = 0;
+
+    //cat 2
+    cat2.etaMax        = 0.8;
+    cat2.etaMin        = 0;
+    cat2.nHitsMax      = 50;
+    cat2.nHitsMin      = 8;
+    cat2.nPixelHitsMax = 8;
+    cat2.nPixelHitsMin = 3;
+    cat2.pMax          = 8;
+    cat2.pMin          = 0;
+    cat2.chiMin        = 0;
+    cat2.chiMax        = 2.5;
+    cat2.withFirstPixel = 0;
+
+    //cat 3
+    cat3.etaMax        = 1.6;
+    cat3.etaMin        = 0.8;
+    cat3.nHitsMax      = 50;
+    cat3.nHitsMin      = 8;
+    cat3.nPixelHitsMax = 8;
+    cat3.nPixelHitsMin = 3;
+    cat3.pMax          = 8;
+    cat3.pMin          = 0;
+    cat3.chiMin        = 0;
+    cat3.chiMax        = 2.5;
+    cat3.withFirstPixel = 0;
+
+    //cat 4
+    cat4.etaMax        = 2.5;
+    cat4.etaMin        = 1.6;
+    cat4.nHitsMax      = 50;
+    cat4.nHitsMin      = 8;
+    cat4.nPixelHitsMax = 8;
+    cat4.nPixelHitsMin = 3;
+    cat4.pMax          = 8;
+    cat4.pMin          = 0;
+    cat4.chiMin        = 0;
+    cat4.chiMax        = 2.5;
+    cat4.withFirstPixel = 0;
+
+    //cat 5
+    cat5.etaMax        = 2.5;
+    cat5.etaMin        = 0;
+    cat5.nHitsMax      = 50;
+    cat5.nHitsMin      = 8;
+    cat5.nPixelHitsMax = 8;
+    cat5.nPixelHitsMin = 2;
+    cat5.pMax          = 8;
+    cat5.pMin          = 0;
+    cat5.chiMin        = 0;
+    cat5.chiMax        = 2.5;
+    cat5.withFirstPixel = 0;
+
+    //cat 6
+    cat6.etaMax        = 0.8;
+    cat6.etaMin        = 0;
+    cat6.nHitsMax      = 50;
+    cat6.nHitsMin      = 8;
+    cat6.nPixelHitsMax = 8;
+    cat6.nPixelHitsMin = 3;
+    cat6.pMax          = 5000;
+    cat6.pMin          = 8;
+    cat6.chiMin        = 0;
+    cat6.chiMax        = 2.5;
+    cat6.withFirstPixel = 0;
+
+    //cat 7
+    cat7.etaMax        = 1.6;
+    cat7.etaMin        = 0.8;
+    cat7.nHitsMax      = 50;
+    cat7.nHitsMin      = 8;
+    cat7.nPixelHitsMax = 8;
+    cat7.nPixelHitsMin = 3;
+    cat7.pMax          = 5000;
+    cat7.pMin          = 8;
+    cat7.chiMin        = 0;
+    cat7.chiMax        = 2.5;
+    cat7.withFirstPixel = 0;
+
+    //cat 8
+    cat8.etaMax        = 2.5;
+    cat8.etaMin        = 1.6;
+    cat8.nHitsMax      = 50;
+    cat8.nHitsMin      = 8;
+    cat8.nPixelHitsMax = 8;
+    cat8.nPixelHitsMin = 3;
+    cat8.pMax          = 5000;
+    cat8.pMin          = 8;
+    cat8.chiMin        = 0;
+    cat8.chiMax        = 2.5;
+    cat8.withFirstPixel = 0;
+
+    //cat 9
+    cat9.etaMax        = 2.5;
+    cat9.etaMin        = 0;
+    cat9.nHitsMax      = 50;
+    cat9.nHitsMin      = 8;
+    cat9.nPixelHitsMax = 2;
+    cat9.nPixelHitsMin = 2;
+    cat9.pMax          = 5000;
+    cat9.pMin          = 8;
+    cat9.chiMin        = 0;
+    cat9.chiMax        = 2.5;
+    cat9.withFirstPixel = 0;
+  }
+
+
+  // ------------ method called once each job just after ending the event loop  ------------
+  void BTagAnalyzer::endJob() {
+  }
+
+
+  std::vector< float > BTagAnalyzer::getTrackProbabilies(std::vector< float > v, const int ipType){
+
+    std::vector< float > vectTrackProba;
+
+    for (std::vector<float>::const_iterator q = v.begin(); q != v.end(); ++q) {
+      //positives and negatives tracks
+      double p3d = 0;
+      if(ipType == 0){
+        if ( *q>=0){p3d= (*q)/2.;}else{p3d=1.+(*q)/2.;}
+        //if(-log(p3d)> 5) p3d=exp(-5.0);
+        vectTrackProba.push_back(p3d);
+      }
+
+      //positives tracks only
+      if(ipType == 1 && *q >=0 ){
+        vectTrackProba.push_back(*q);
+      }
+
+      //negatives tracks only
+      if(ipType == 2 && *q <0){
+        vectTrackProba.push_back(-(*q));
+      }
+    }
+
+    return vectTrackProba;
+  }
+
+
+  double BTagAnalyzer::calculProbability(std::vector< float > v) {
+
+    int ngoodtracks=v.size();
+    double SumJet=0.;
+    double m_minTrackProb = 0.005;
+    for (std::vector<float>::const_iterator q = v.begin(); q != v.end(); ++q) {
+      SumJet += (*q>m_minTrackProb)?log(*q):log(m_minTrackProb);
+    }
+
+    double ProbJet;
+    double Loginvlog = 0;
+
+    if ( SumJet < 0. ) {
+      if ( ngoodtracks >= 2 ) {
+        Loginvlog = log(-SumJet);
+      }
+      double Prob = 1.;
+      double lfact = 1.;
+      for (int l=1; l!=ngoodtracks; ++l) {
+        lfact *= l;
+        Prob += exp( l*Loginvlog-log(1.*lfact) );
+      }
+      double LogProb = log(Prob);
+      ProbJet = std::min(exp( std::max(LogProb+SumJet,-30.) ), 1.);
+    } else {
+      ProbJet = 1.;
+    }
+    return ProbJet;
+  }
+
+
+  bool BTagAnalyzer::findCat(const reco::Track* track, CategoryFinder& d) {
+    //int numcat=-1;
+
+    double   p = track->p();
+    double eta = track->eta();
+    double chi = track->normalizedChi2();
+    int   nhit = track->numberOfValidHits();
+    int   npix = track->hitPattern().numberOfValidPixelHits();
+
+    bool result = ( p > d.pMin  &&  p  < d.pMax		  &&
+        fabs(eta) > d.etaMin    &&  fabs(eta) < d.etaMax    &&
+        nhit >= d.nHitsMin      &&  nhit <= d.nHitsMax	  &&
+        npix >= d.nPixelHitsMin &&  npix <= d.nPixelHitsMax &&
+        chi >= d.chiMin         &&  chi <= d.chiMax );
+
+    return result;
+  }
+
+
+  int BTagAnalyzer::matchMuon(const edm::RefToBase<reco::Track>& theMuon, const edm::View<reco::Muon>& muons ){
+    double small = 1.e-3;
+    int matchedMu = -1;
+    for(unsigned int i=0; i<muons.size(); ++i){
+      double muonpt = -10000;
+      if( muons[i].isGlobalMuon() )                               muonpt = muons[i].globalTrack()->pt() ;
+      if(!muons[i].isGlobalMuon() &&  muons[i].isTrackerMuon())   muonpt = muons[i].innerTrack()->pt() ;
+
+      if ( fabs(theMuon->pt() - muonpt )  < small  ){ matchedMu = i; }
+
+    }
+    return matchedMu;
+  }
+
+
+  std::vector<BTagAnalyzer::simPrimaryVertex> BTagAnalyzer::getSimPVs(const edm::Handle<edm::HepMCProduct>& evtMC){
+
+    std::vector<BTagAnalyzer::simPrimaryVertex> simpv;
+    const HepMC::GenEvent* evt=evtMC->GetEvent();
+    if (evt) {
+
+      for ( HepMC::GenEvent::vertex_const_iterator vitr= evt->vertices_begin();
+          vitr != evt->vertices_end(); ++vitr ) { // loop for vertex ...
+        HepMC::FourVector pos = (*vitr)->position();
+        //HepLorentzVector pos = (*vitr)->position();
+
+        bool hasMotherVertex=false;
+
+        for ( HepMC::GenVertex::particle_iterator
+            mother  = (*vitr)->particles_begin(HepMC::parents);
+            mother != (*vitr)->particles_end(HepMC::parents);
+            ++mother ) {
+          HepMC::GenVertex * mv=(*mother)->production_vertex();
+          if (mv) {
+            hasMotherVertex=true;
+            break; //if verbose_, print all particles of gen vertices
+          }
+        }
+
+        if (hasMotherVertex) {continue;}
+
+        // could be a new vertex, check  all primaries found so far to avoid multiple entries
+        const double mm=0.1;
+        simPrimaryVertex sv(pos.x()*mm,pos.y()*mm,pos.z()*mm);
+        simPrimaryVertex *vp=NULL;  // will become non-NULL if a vertex is found and then point to it
+        for (std::vector<simPrimaryVertex>::iterator v0=simpv.begin();
+            v0!=simpv.end(); ++v0) {
+          if ( (fabs(sv.x-v0->x)<1e-5) && (fabs(sv.y-v0->y)<1e-5)
+              && (fabs(sv.z-v0->z)<1e-5) ) {
+            vp=&(*v0);
+            break;
+          }
+        }
+
+        if (!vp) {	  // this is a new vertex
+          simpv.push_back(sv);
+          vp=&simpv.back();
+        }
+        vp->genVertex.push_back((*vitr)->barcode());
+      }
+    }
+    return simpv;
+  }
+
+
+  int BTagAnalyzer::getMuonTk(double pt, const int iJetColl) {
+    int idxTk = -1;
+    for (int itk = 0; itk < JetInfo[iJetColl].nTrack ; ++itk) {
+      if ( fabs(pt-JetInfo[iJetColl].Track_pt[itk]) < 1e-5 ) idxTk = itk;
+    }
+    return idxTk;
+  }
+
+
+  int BTagAnalyzer::isFromGSP(const reco::Candidate* c)
+  {
+    int isFromGSP = 0;
+
+    if( c->numberOfMothers() == 1 ) {
+      const reco::Candidate* dau = c;
+      const reco::Candidate* mom = c->mother();
+      while( dau->numberOfMothers() == 1 && !( mom->status()==3 && (abs(mom->pdgId())==4 || abs(mom->pdgId())==5) ) ) {
+        if( abs(mom->pdgId())==21 )
+        {
+          isFromGSP = 1;
           break;
         }
+        dau = mom;
+        mom = dau->mother();
       }
-
-      if (!vp) {	  // this is a new vertex
-        simpv.push_back(sv);
-        vp=&simpv.back();
-      }
-      vp->genVertex.push_back((*vitr)->barcode());
     }
-  }
-  return simpv;
-}
 
-
-int BTagAnalyzer::getMuonTk(double pt, const int iJetColl) {
-  int idxTk = -1;
-  for (int itk = 0; itk < JetInfo[iJetColl].nTrack ; ++itk) {
-    if ( fabs(pt-JetInfo[iJetColl].Track_pt[itk]) < 1e-5 ) idxTk = itk;
-  }
-  return idxTk;
-}
-
-
-int BTagAnalyzer::isFromGSP(const reco::Candidate* c)
-{
-  int isFromGSP = 0;
-
-  if( c->numberOfMothers() == 1 ) {
-    const reco::Candidate* dau = c;
-    const reco::Candidate* mom = c->mother();
-    while( dau->numberOfMothers() == 1 && !( mom->status()==3 && (abs(mom->pdgId())==4 || abs(mom->pdgId())==5) ) ) {
-      if( abs(mom->pdgId())==21 )
-      {
-        isFromGSP = 1;
-        break;
-      }
-      dau = mom;
-      mom = dau->mother();
-    }
+    return isFromGSP;
   }
 
-  return isFromGSP;
-}
+  // -------------------------------------------------------------------------
+  // NameCompatible
+  // -------------------------------------------------------------------------
+  bool BTagAnalyzer::NameCompatible(const std::string& pattern, const std::string& name)
+  {
+    const boost::regex regexp(edm::glob2reg(pattern));
 
-// -------------------------------------------------------------------------
-// NameCompatible
-// -------------------------------------------------------------------------
-bool BTagAnalyzer::NameCompatible(const std::string& pattern, const std::string& name)
-{
-  const boost::regex regexp(edm::glob2reg(pattern));
-
-  return boost::regex_match(name,regexp);
-}
+    return boost::regex_match(name,regexp);
+  }
 
 
-//define this as a plug-in
-DEFINE_FWK_MODULE(BTagAnalyzer);
+  //define this as a plug-in
+  DEFINE_FWK_MODULE(BTagAnalyzer);
 
 

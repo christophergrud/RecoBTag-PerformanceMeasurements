@@ -83,7 +83,25 @@ class JetInfoBranches {
 //$$$$
     int   Jet_nsharedtracks[nMaxJets_];
 //$$$$
-    int   Jet_flavour[nMaxJets_];
+    int    Jet_motherId[nMaxJets_];
+    double Jet_motherMass[nMaxJets_];
+    double Jet_motherEnergy[nMaxJets_];
+    double Jet_motherPt[nMaxJets_];
+    double Jet_motherEta[nMaxJets_];
+    double Jet_motherPhi[nMaxJets_];
+    int    Jet_grandmotherId[nMaxJets_]; 
+    double Jet_grandmotherMass[nMaxJets_];
+    double Jet_grandmotherEnergy[nMaxJets_];
+    double Jet_grandmotherPt[nMaxJets_];
+    double Jet_grandmotherEta[nMaxJets_];
+    double Jet_grandmotherPhi[nMaxJets_];
+    int    Jet_greatgrandmotherId[nMaxJets_]; 
+    double Jet_greatgrandmotherMass[nMaxJets_];
+    double Jet_greatgrandmotherEnergy[nMaxJets_];
+    double Jet_greatgrandmotherPt[nMaxJets_];
+    double Jet_greatgrandmotherEta[nMaxJets_];
+    double Jet_greatgrandmotherPhi[nMaxJets_];
+    double Jet_flavour[nMaxJets_];
     int   Jet_nFirstTrack[nMaxJets_];
     int   Jet_nLastTrack[nMaxJets_];
     int   Jet_nFirstSV[nMaxJets_];
