@@ -111,6 +111,7 @@ Implementation:
 #include "RecoBTag/PerformanceMeasurements/interface/JetInfoBranches.h"
 #include "RecoBTag/PerformanceMeasurements/interface/EventInfoBranches.h"
 #include "RecoBTag/PerformanceMeasurements/interface/BookHistograms.h"
+#include "RecoBTag/PerformanceMeasurements/interface/LeptonInfoBranches.h"
 
 //
 // constants, enums and typedefs
@@ -264,6 +265,7 @@ class BTagAnalyzer : public edm::EDAnalyzer
     bool use_selected_tracks_;
     bool produceJetProbaTree_;
     bool producePtRelTemplate_;
+    bool runLeptons_;
 
     bool use_ttbar_filter_;
     edm::InputTag channel_;
@@ -293,6 +295,9 @@ class BTagAnalyzer : public edm::EDAnalyzer
 
     //// Event info
     EventInfoBranches EventInfo;
+
+    //// Lepton info
+    LeptonInfoBranches LeptonInfo;
 
     //// Jet info
     JetInfoBranches JetInfo[MAX_JETCOLLECTIONS] ;

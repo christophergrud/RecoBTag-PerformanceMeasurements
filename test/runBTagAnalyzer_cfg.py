@@ -71,6 +71,12 @@ options.register('useTTbarFilter', False,
     "Use TTbar filter"
 )
 
+#options.register('runLeptons', True,
+#    VarParsing.multiplicity.singleton,
+#    VarParsing.varType.bool,
+#    "runLeptons"
+#)
+
 ## 'maxEvents' is already registered by the Framework, changing default value
 options.setDefault('maxEvents', 100)
 
@@ -138,7 +144,8 @@ process.source = cms.Source(
         # /QCD_Pt-470to600_TuneZ2star_8TeV_pythia6/Summer12_DR53X-PU_S10_START53_V7A-v2/AODSIM
         #'/store/mc/Summer12_DR53X/QCD_Pt-470to600_TuneZ2star_8TeV_pythia6/AODSIM/PU_S10_START53_V7A-v2/00000/FADB0913-1708-E211-BBB1-00261894383C.root'
         # /TTJets_MassiveBinDECAY_TuneZ2star_8TeV-madgraph-tauola/Summer12_DR53X-PU_S10_START53_V7C-v1/AODSIM
-        '/store/mc/Summer12_DR53X/TTJets_MassiveBinDECAY_TuneZ2star_8TeV-madgraph-tauola/AODSIM/PU_S10_START53_V7C-v1/00000/FE7C71D8-DB25-E211-A93B-0025901D4C74.root'
+        #'/store/mc/Summer12_DR53X/TTJets_MassiveBinDECAY_TuneZ2star_8TeV-madgraph-tauola/AODSIM/PU_S10_START53_V7C-v1/00000/FE7C71D8-DB25-E211-A93B-0025901D4C74.root'
+	'file:/cms/se/phedex/store/mc/Summer12_DR53X/BprimeBprimeToBHBHinc_M-1000_TuneZ2star_8TeV-madgraph/AODSIM/PU_S10_START53_V7C-v1/10000/024BEF94-E93D-E211-BB47-0030487F16F7.root'
     )
 )
 
@@ -610,6 +617,7 @@ process.selectedPatJetsCA8PrunedPFPacked = cms.EDProducer("BoostedJetMerger",
 #-------------------------------------
 #from PhysicsTools.PatAlgos.tools.coreTools import * # Already imported above
 ## Remove objects not used from the PAT sequences to speed up processing
+
 if options.runSubJets:
     removeAllPATObjectsBut(process, ['Jets', 'Muons'])
 
@@ -754,7 +762,7 @@ process.btagana.Jets                  = cms.InputTag('selectedPatJets'+postfix)
 process.btagana.patMuonCollectionName = cms.InputTag('selectedPatMuons')
 process.btagana.use_ttbar_filter      = cms.bool(options.useTTbarFilter)
 process.btagana.triggerTable          = cms.InputTag('TriggerResults::HLT') # Data and MC
-
+#process.btagana.runLeptons            = cms.bool(options.runLeptons)
 process.btaganaSubJets = process.btagana.clone(
     produceJetProbaTree = cms.bool(True),
     allowJetSkipping    = cms.bool(False),

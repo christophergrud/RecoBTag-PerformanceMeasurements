@@ -45,7 +45,7 @@ BTagAnalyzer::BTagAnalyzer(const edm::ParameterSet& iConfig):
   allowJetSkipping_ = iConfig.getParameter<bool>("allowJetSkipping");
   minJetPt_  = iConfig.getParameter<double>("MinPt");
   maxJetEta_ = iConfig.getParameter<double>("MaxEta");
-  //runLeptons_ = iConfig.getParameter<bool>("runLeptons");
+  runLeptons_ = iConfig.getParameter<bool>("runLeptons");
 
   selTagger_ = iConfig.getParameter<int>("selTagger");
 
@@ -164,7 +164,7 @@ BTagAnalyzer::BTagAnalyzer(const edm::ParameterSet& iConfig):
   //-------------------------------------
   // lepton information
   //-------------------------------------
-  if ( true ) LeptonInfo.RegisterTree(smalltree);
+  if ( runLeptons_) LeptonInfo.RegisterTree(smalltree);
 
   //// Book Histograms
   Histos[0] = new BookHistograms(fs->mkdir( "HistJets" )) ;
@@ -289,13 +289,6 @@ void BTagAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
   EventInfo.nGenquark  = 0;
   EventInfo.nPatMuon   = 0;
   EventInfo.mcweight   = 1.;
-  LeptonInfo.nMu     = 0;
-//  LeptonInfo.nGenMu    = 0;
-//  LeptonInfo.nGenB     = 0;
-//  LeptonInfo.nGenLL    = 0;
-//  LeptonInfo.nGenHiggs = 0;
-//  LeptonInfo.nGenW     = 0;
-  LeptonInfo.nGenPart  = 0;
 
 //$$
   bool AreBHadrons = false;
@@ -326,41 +319,6 @@ void BTagAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
         ++EventInfo.nPU;
       }
       EventInfo.nPUtrue = ipu->getTrueNumInteractions();
-    }
-  //------------------------------------------------------
-  // pruned gen particles
-  //------------------------------------------------------
-    edm::Handle<reco::GenParticleCollection> prunedGenParticles;
-    iEvent.getByLabel ("prunedGenParticles", prunedGenParticles);
-   
-    for (size_t i = 0; i<prunedGenParticles->size(); ++i) {
-      const GenParticle & pGenIt = (*prunedGenParticles)[i];
-    
-	    LeptonInfo.GenPart_pt[LeptonInfo.nGenPart] = pGenIt.pt();
-	    LeptonInfo.GenPart_phi[LeptonInfo.nGenPart] = pGenIt.phi();
-	    LeptonInfo.GenPart_eta[LeptonInfo.nGenPart] = pGenIt.eta();	
-	    LeptonInfo.GenPart_mass[LeptonInfo.nGenPart] = pGenIt.mass();
-	    LeptonInfo.GenPart_pdgid[LeptonInfo.nGenPart] = pGenIt.pdgId();
-      LeptonInfo.GenPart_status[LeptonInfo.nGenPart] = pGenIt.status();
-      int idx = -1;
-      for( reco::GenParticleCollection::const_iterator mIt = prunedGenParticles->begin(); mIt != prunedGenParticles->end(); ++mIt ) {
-        if( pGenIt.mother() == &(*mIt) ) {
-          idx = std::distance(prunedGenParticles->begin(),mIt);
-          break;
-        }
-      }
-      LeptonInfo.GenPart_mother[LeptonInfo.nGenPart] = idx;
-      LeptonInfo.GenPart_vertX[LeptonInfo.nGenPart] = pGenIt.vx();
-      LeptonInfo.GenPart_vertY[LeptonInfo.nGenPart] = pGenIt.vy();
-      LeptonInfo.GenPart_vertZ[LeptonInfo.nGenPart] = pGenIt.vz();
-	    ++LeptonInfo.nGenPart;	
-      
-     /* std::cout << "****************************" << endl;
-      std::cout << "pdgID: " << LeptonInfo.GenPart_pdgid[LeptonInfo.nGenPart] <<endl;
-      std::cout << "index: " << LeptonInfo.nGenPart << endl;
-      std::cout << "vertex x: " << LeptonInfo.GenPart_vertX[LeptonInfo.nGenPart] << endl;
-      std::cout << "vertex y: " << LeptonInfo.GenPart_vertY[LeptonInfo.nGenPart] << endl;
-      std::cout << "vertex z: " << LeptonInfo.GenPart_vertZ[LeptonInfo.nGenPart] << endl; */
     }
 
   //------------------------------------------------------
@@ -846,10 +804,55 @@ void BTagAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
       EventInfo.PatMuon_IPsig[EventInfo.nPatMuon]    = (it->dB(pat::Muon::PV3D))/(it->edB(pat::Muon::PV3D));
       EventInfo.PatMuon_IP2D[EventInfo.nPatMuon]     = it->dB(pat::Muon::PV2D);
       EventInfo.PatMuon_IP2Dsig[EventInfo.nPatMuon]  = (it->dB(pat::Muon::PV2D))/(it->edB(pat::Muon::PV2D));
-  
+
       ++EventInfo.nPatMuon;
     }
   }
+  LeptonInfo.nMuon = 0;
+  if ( runLeptons_ ){
+   iEvent.getByLabel(patMuonCollectionName_,patMuonsHandle);
+   for( std::vector<pat::Muon>::const_iterator it = patMuonsHandle->begin(); it != patMuonsHandle->end(); ++it ){
+      LeptonInfo.Muon_trkIso[LeptonInfo.nMuon] = it->trackIso();
+      LeptonInfo.Muon_trackerIsoSumPT[LeptonInfo.nMuon] = it->isolationR03().sumPt;
+      LeptonInfo.Muon_ecalIso[LeptonInfo.nMuon] = it->ecalIso();	
+      LeptonInfo.Muon_hcalIso[LeptonInfo.nMuon] = it->hcalIso();
+      LeptonInfo.Muon_hoIso[LeptonInfo.nMuon] = it->isolationR03().hoEt;
+      LeptonInfo.Muon_ecalVetoIso[LeptonInfo.nMuon] = it->isolationR03().emVetoEt;
+      LeptonInfo.Muon_hcalVetoIso[LeptonInfo.nMuon] = it->isolationR03().hadVetoEt;
+      LeptonInfo.Muon_pfisor03chargedhadron[LeptonInfo.nMuon] = it->pfIsolationR03().sumChargedHadronPt;
+      LeptonInfo.Muon_pfisor03chargedparticle[LeptonInfo.nMuon] = it->pfIsolationR03().sumChargedParticlePt;
+      LeptonInfo.Muon_pfisor03neutralhadron[LeptonInfo.nMuon] = it->pfIsolationR03().sumNeutralHadronEt;
+      LeptonInfo.Muon_pfisor03photon[LeptonInfo.nMuon] = it->pfIsolationR03().sumPhotonEt;
+      LeptonInfo.Muon_pfisor03neutralhadronht[LeptonInfo.nMuon] = it->pfIsolationR03().sumNeutralHadronEtHighThreshold;
+      LeptonInfo.Muon_pfisor03photonht[LeptonInfo.nMuon] = it->pfIsolationR03().sumPhotonEtHighThreshold();
+      LeptonInfo.Muon_pfisor03pu[LeptonInfo.nMuon] = it->pfIsolationR03().sumPUPt;
+      LeptonInfo.Muon_pfisor04chargedhadron[LeptonInfo.nMuon] = it->pfIsolationR04().sumChargedHadronPt;
+      LeptonInfo.Muon_pfisor04chargedparticle[LeptonInfo.nMuon] = it->pfIsolationR04().sumChargedParticlePt;
+      LeptonInfo.Muon_pfisor04neutralhadron[LeptonInfo.nMuon] = it->pfIsolationR04().sumNeutralHadronEt;
+      LeptonInfo.Muon_pfisor04photon[LeptonInfo.nMuon] = it->pfIsolationR04().sumPhotonEt;
+      LeptonInfo.Muon_pfisor04neutralhadronht[LeptonInfo.nMuon] = it->pfIsolationR04().sumNeutralHadronEtHighThreshold;
+      LeptonInfo.Muon_pfisor04photonht[LeptonInfo.nMuon] = it->pfIsolationR04().sumPhotonEtHighThreshold();
+      LeptonInfo.Muon_pfisor04pu[LeptonInfo.nMuon] = it->pfIsolationR04().sumPUPt;
+      LeptonInfo.Muon_isPF[LeptonInfo.nMuon] = it->isPFMuon();
+      LeptonInfo.Muon_isGlobal[LeptonInfo.nMuon] = it->isGlobalMuon();
+      LeptonInfo.Muon_isTracker[LeptonInfo.nMuon] = it->isTrackerMuon();
+      LeptonInfo.Muon_isGood[LeptonInfo.nMuon] = it->isGoodMuon();
+      LeptonInfo.Muon_isHighPt[LeptonInfo.nMuon] = it->isHighPtMuon();
+      LeptonInfo.Muon_nTrackLayers[LeptonInfo.nMuon] = it->;
+      LeptonInfo.Muon_nPixelLayers[LeptonInfo.nMuon] = it->innerTrack()->hitPattern().pixelLayersWithMeasurement();
+      LeptonInfo.Muon_nPixelHits[LeptonInfo.nMuon] = it->innerTrack()->hitPattern().numberOfValidPixelHits();
+      LeptonInfo.Muon_nValidHits[LeptonInfo.nMuon] = it->globalTrack()->hitPattern().numberOfValidMuonHits();
+      LeptonInfo.Muon_nMatchedStations[LeptonInfo.nMuon] = it->numberOfMatchedStations();
+      LeptonInfo.Muon_innerTrack_normChi2[LeptonInfo.nMuon] = it->innerTrack()->normalizedChi2();
+      LeptonInfo.Muon_innerTrack_dxyVertPos[LeptonInfo.nMuon] = fabs(it->innerTrack()->dxy(vertex->position()));
+      LeptonInfo.Muon_innerTrack_dzVertPos[LeptonInfo.nMuon] = fabs(it->innerTrack()->dz(vertex->position()));
+      LeptonInfo.Muon_bestTrack_dzVertPos[LeptonInfo.nMuon] = fabs(it->muonBestTrack()->dz(vertex->position()));
+      LeptonInfo.Muon_bestTrack_dxyVertPos[LeptonInfo.nMuon] = fabs(it->muonBestTrack()->dxy(vertex->position()));
+      LeptonInfo.Muon_globalTrack_normChi2[LeptonInfo.nMuon] = it->globalTrack()->normalizedChi2();
+      ++LeptonInfo.nMuon; 
+   }
+  }
+
   //------------------------------------------------------
   // Muons
   //------------------------------------------------------
@@ -902,63 +905,6 @@ void BTagAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
     EventInfo.PV_isfake[EventInfo.nPV] = (*primaryVertex)[i].isFake();
 
     ++EventInfo.nPV;
-  }
-
-//------------------------------------------------------
-// Lepton Info
-//------------------------------------------------------
-
-   if ( true ){
-   iEvent.getByLabel(patMuonCollectionName_,patMuonsHandle);
-   for( std::vector<pat::Muon>::const_iterator it = patMuonsHandle->begin(); it != patMuonsHandle->end(); ++it ){
-      LeptonInfo.Mu_trkIso[LeptonInfo.nMu] = it->trackIso();
-      LeptonInfo.Mu_trackerIsoSumPT[LeptonInfo.nMu] = it->isolationR03().sumPt;
-      LeptonInfo.Mu_ecalIso[LeptonInfo.nMu] = it->ecalIso();	
-      LeptonInfo.Mu_hcalIso[LeptonInfo.nMu] = it->hcalIso();
-      LeptonInfo.Mu_hoIso[LeptonInfo.nMu] = it->isolationR03().hoEt;
-      LeptonInfo.Mu_ecalVetoIso[LeptonInfo.nMu] = it->isolationR03().emVetoEt;
-      LeptonInfo.Mu_hcalVetoIso[LeptonInfo.nMu] = it->isolationR03().hadVetoEt;
-      LeptonInfo.Mu_pfisor03chargedhadron[LeptonInfo.nMu] = it->pfIsolationR03().sumChargedHadronPt;
-      LeptonInfo.Mu_pfisor03chargedparticle[LeptonInfo.nMu] = it->pfIsolationR03().sumChargedParticlePt;
-      LeptonInfo.Mu_pfisor03neutralhadron[LeptonInfo.nMu] = it->pfIsolationR03().sumNeutralHadronEt;
-      LeptonInfo.Mu_pfisor03photon[LeptonInfo.nMu] = it->pfIsolationR03().sumPhotonEt;
-      LeptonInfo.Mu_pfisor03neutralhadronht[LeptonInfo.nMu] = it->pfIsolationR03().sumNeutralHadronEtHighThreshold;
-      LeptonInfo.Mu_pfisor03photonht[LeptonInfo.nMu] = it->pfIsolationR03().sumPhotonEtHighThreshold;
-      LeptonInfo.Mu_pfisor03pu[LeptonInfo.nMu] = it->pfIsolationR03().sumPUPt;
-      LeptonInfo.Mu_pfisor04chargedhadron[LeptonInfo.nMu] = it->pfIsolationR04().sumChargedHadronPt;
-      LeptonInfo.Mu_pfisor04chargedparticle[LeptonInfo.nMu] = it->pfIsolationR04().sumChargedParticlePt;
-      LeptonInfo.Mu_pfisor04neutralhadron[LeptonInfo.nMu] = it->pfIsolationR04().sumNeutralHadronEt;
-      LeptonInfo.Mu_pfisor04photon[LeptonInfo.nMu] = it->pfIsolationR04().sumPhotonEt;
-      LeptonInfo.Mu_pfisor04neutralhadronht[LeptonInfo.nMu] = it->pfIsolationR04().sumNeutralHadronEtHighThreshold;
-      LeptonInfo.Mu_pfisor04photonht[LeptonInfo.nMu] = it->pfIsolationR04().sumPhotonEtHighThreshold;
-      LeptonInfo.Mu_pfisor04pu[LeptonInfo.nMu] = it->pfIsolationR04().sumPUPt;
-      LeptonInfo.Mu_isPF[LeptonInfo.nMu] = it->isPFMuon();
-      LeptonInfo.Mu_isGlobal[LeptonInfo.nMu] = it->isGlobalMuon();
-      LeptonInfo.Mu_isTracker[LeptonInfo.nMu] = it->isTrackerMuon();
-      LeptonInfo.Mu_nTrackLayers[LeptonInfo.nMu] = (it->isTrackerMuon()? it->innerTrack()->hitPattern().trackerLayersWithMeasurement(): -99);
-      LeptonInfo.Mu_nPixelLayers[LeptonInfo.nMu] = (it->isTrackerMuon()? it->innerTrack()->hitPattern().pixelLayersWithMeasurement(): -99);
-      LeptonInfo.Mu_nPixelHits[LeptonInfo.nMu] = (it->isTrackerMuon()? it->innerTrack()->hitPattern().numberOfValidPixelHits(): -99);
-      LeptonInfo.Mu_nValidHits[LeptonInfo.nMu] = (it->isGlobalMuon()? it->globalTrack()->hitPattern().numberOfValidMuonHits(): -99);
-      LeptonInfo.Mu_nMatchedStations[LeptonInfo.nMu] = it->numberOfMatchedStations();
-      LeptonInfo.Mu_innerTrack_normChi2[LeptonInfo.nMu] = (it->isTrackerMuon()? it->innerTrack()->normalizedChi2():-99);
-      LeptonInfo.Mu_innerTrack_dxyVertPos[LeptonInfo.nMu] = (it->isTrackerMuon()? fabs(it->innerTrack()->dxy((*primaryVertex)[0].position())): -99);
-      LeptonInfo.Mu_innerTrack_dzVertPos[LeptonInfo.nMu] = (it->isTrackerMuon()? fabs(it->innerTrack()->dz((*primaryVertex)[0].position())): -99);
-      LeptonInfo.Mu_bestTrack_dzVertPos[LeptonInfo.nMu] = fabs(it->muonBestTrack()->dz((*primaryVertex)[0].position()));
-      LeptonInfo.Mu_bestTrack_dxyVertPos[LeptonInfo.nMu] = fabs(it->muonBestTrack()->dxy((*primaryVertex)[0].position()));
-      LeptonInfo.Mu_globalTrack_normChi2[LeptonInfo.nMu] = (it->isGlobalMuon()? it->globalTrack()->normalizedChi2():-99);
-      LeptonInfo.Mu_IP3D[LeptonInfo.nMu]       = it->dB(pat::Muon::PV3D);
-      LeptonInfo.Mu_IP3Der[LeptonInfo.nMu]    = it->edB(pat::Muon::PV3D);
-      LeptonInfo.Mu_IP2D[LeptonInfo.nMu]     = it->dB(pat::Muon::PV2D);
-      LeptonInfo.Mu_IP2Der[LeptonInfo.nMu]  = it->edB(pat::Muon::PV2D); 
-      LeptonInfo.Mu_pt[LeptonInfo.nMu] = it->pt();
-      LeptonInfo.Mu_phi[LeptonInfo.nMu] = it->phi();
-      LeptonInfo.Mu_eta[LeptonInfo.nMu] = it->eta();
-      LeptonInfo.Mu_mass[LeptonInfo.nMu] = it->mass();
-      
-//      std::cout << "Muon 3D IP = " << LeptonInfo.Mu_IP3D[LeptonInfo.nMu] << std::endl; 
-
-      ++LeptonInfo.nMu; 
-   }
   }
 
   //------------------------------------------------------
