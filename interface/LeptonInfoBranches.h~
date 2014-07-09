@@ -1,0 +1,161 @@
+#ifndef LEPTONINFOBRANCHES_H
+#define LEPTONINFOBRANCHES_H
+
+#include <TTree.h>
+\
+const UInt_t nMaxMuons_= 10000;
+
+class LeptonInfoBranches {
+
+  public :
+
+    int   nMuon;
+
+    //-----------------------
+    // Isolation Variables
+    //-----------------------
+    float   Muon_trkIso[nMaxMuons_];
+    float   Muon_trackerIsoSumPT[nMaxMuons_];
+    float   Muon_ecalIso[nMaxMuons_];
+    float   Muon_hcalIso[nMaxMuons_];
+    float   Muon_hoIso[nMaxMuons_];
+    float   Muon_ecalVetoIso[nMaxMuons_];
+    float   Muon_hcalVetoIso[nMaxMuons_];
+    float   Muon_pfisor03chargedhadron[nMaxMuons_];
+    float   Muon_pfisor03chargedparticle[nMaxMuons_];
+    float   Muon_pfisor03neutralhadron[nMaxMuons_];
+    float   Muon_pfisor03photon[nMaxMuons_];
+    float   Muon_pfisor03neutralhadronht[nMaxMuons_];
+    float   Muon_pfisor03photonht[nMaxMuons_];
+    float   Muon_pfisor03pu[nMaxMuons_];
+    float   Muon_pfisor04chargedhadron[nMaxMuons_];
+    float   Muon_pfisor04chargedparticle[nMaxMuons_];
+    float   Muon_pfisor04neutralhadron[nMaxMuons_];
+    float   Muon_pfisor04photon[nMaxMuons_];
+    float   Muon_pfisor04neutralhadronht[nMaxMuons_];
+    float   Muon_pfisor04photonht[nMaxMuons_];
+    float   Muon_pfisor04pu[nMaxMuons_];
+    
+    //------------------
+    // ID variables
+    //------------------
+    int Muon_isPF[nMaxMuons_];
+    int Muon_isGlobal[nMaxMuons_];
+    int Muon_isTracker[nMaxMuons_];
+    int Muon_isGood[nMaxMuons_];
+    int Muon_isHighPt[nMaxMuons_];
+    int Muon_nTrackLayers[nMaxMuons_];
+    int Muon_nPixelLayers[nMaxMuons_];
+    int Muon_nPixelHits[nMaxMuons_];
+    int Muon_nValidHits[nMaxMuons_];
+    int Muon_nMatchedStations[nMaxMuons_];
+    float Muon_innerTrack_normChi2[nMaxMuons_];
+    float Muon_innerTrack_dxyVertPos[nMaxMuons_];
+    float Muon_innerTrack_dzVertPos[nMaxMuons_];
+    float Muon_bestTrack_dzVertPos[nMaxMuons_];
+    float Muon_bestTrack_normChi2[nMaxMuons_];
+    
+
+    void RegisterTree(TTree *tree, std::string name="") {
+      if(name!="") name += ".";
+      //------------------------------
+      // Isolation Variables
+      //------------------------------
+      tree->Branch((name+"nMuon").c_str()         ,&nMuon        ,(name+"nMuon/I").c_str());
+      tree->Branch((name+"Muon_trkIso").c_str()   ,Muon_trkIso   ,(name+"Muon_trkIso["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_trackerIsoSumPT").c_str()   ,Muon_trackerIsoSumPT   ,(name+"Muon_trackerIsoSumPT["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_ecalIso").c_str()   ,Muon_ecalIso   ,(name+"Muon_ecalIso["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_hcalIso").c_str()  ,Muon_hcalIso  ,(name+"Muon_hcalIso["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_hoIso").c_str()  ,Muon_hoIso  ,(name+"Muon_hoIso["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_ecalVetoIso").c_str() ,Muon_ecalVetoIso ,(name+"Muon_ecalVetoIso["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_hcalVetoIso").c_str() ,Muon_hcalVetoIso ,(name+"Muon_hcalVetoIso["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor03chargedhadron").c_str()	  ,Muon_pfisor03chargedhadron	 ,(name+"Muon_pfisor03chargedhadron["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor03chargedparticle").c_str()   ,Muon_pfisor03chargedparticle   ,(name+"Muon_pfisor03chargedparticle["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor03neutralhadron").c_str()       ,Muon_pfisor03neutralhadron       ,(name+"Muon_pfisor03neutralhadron["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor03photon").c_str()      ,Muon_pfisor03photon      ,(name+"Muon_pfisor03photon["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor03neutralhadronht").c_str()      ,Muon_pfisor03neutralhadronht      ,(name+"Muon_pfisor03neutralhadronht["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor03neutralhadronht").c_str()    ,Muon_pfisor03neutralhadronht    ,(name+"Muon_pfisor03neutralhadronht["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor03photonht").c_str()	  ,Muon_pfisor03photonht	 ,(name+"Muon_pfisor03photonht["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor03pu").c_str()	  ,Muon_pfisor03pu	 ,(name+"Muon_pfisor03pu["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor04chargedhadron").c_str()	  ,Muon_pfisor04chargedhadron	 ,(name+"Muon_pfisor04chargedhadron["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor04chargedparticle").c_str()   ,Muon_pfisor04chargedparticle   ,(name+"Muon_pfisor04chargedparticle["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor04neutralhadron").c_str()       ,Muon_pfisor04neutralhadron       ,(name+"Muon_pfisor04neutralhadron["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor04photon").c_str()      ,Muon_pfisor04photon      ,(name+"Muon_pfisor04photon["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor04neutralhadronht").c_str()      ,Muon_pfisor04neutralhadronht      ,(name+"Muon_pfisor04neutralhadronht["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor04neutralhadronht").c_str()    ,Muon_pfisor04neutralhadronht    ,(name+"Muon_pfisor04neutralhadronht["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor04photonht").c_str()	  ,Muon_pfisor04photonht	 ,(name+"Muon_pfisor04photonht["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_pfisor04pu").c_str()	  ,Muon_pfisor04pu	 ,(name+"Muon_pfisor04pu["+name+"nMuon]/F").c_str());
+      //---------------------------
+      // ID Variables
+      //---------------------------
+      tree->Branch((name+"Muon_isPF").c_str() ,Muon_isPF ,(name+"Muon_isPF["+name+"nMuon]/I").c_str());
+      tree->Branch((name+"Muon_isGlobal").c_str()    ,Muon_isGlobal	 ,(name+"Muon_isGlobal["+name+"nMuon]/I").c_str());
+      tree->Branch((name+"Muon_isTracker").c_str()       ,Muon_isTracker       ,(name+"Muon_isTracker["+name+"nMuon]/I").c_str());
+      tree->Branch((name+"Muon_isGood").c_str()  ,Muon_isGood  ,(name+"Muon_isGood["+name+"nMuon]/I").c_str());
+      tree->Branch((name+"Muon_isHighPt").c_str()     ,Muon_isHighPt     ,(name+"Muon_isHighPt["+name+"nMuon]/I").c_str());
+      tree->Branch((name+"Muon_nTrackLayers").c_str()    ,Muon_nTrackLayers    ,(name+"Muon_nTrackLayers["+name+"nMuon]/I").c_str());
+      tree->Branch((name+"Muon_nPixelLayers").c_str()   ,Muon_nPixelLayers   ,(name+"Muon_nPixelLayers["+name+"nMuon]/I").c_str());
+      tree->Branch((name+"Muon_nPixelHits").c_str()    ,Muon_nPixelHits    ,(name+"Muon_nPixelHits["+name+"nMuon]/I").c_str());
+      tree->Branch((name+"Muon_nValidHits").c_str() ,Muon_nValidHits ,(name+"Muon_nValidHits["+name+"nMuon]/I").c_str());
+      tree->Branch((name+"Muon_nMatchedStations").c_str()      ,Muon_nMatchedStations       ,(name+"Muon_nMatchedStations["+name+"nMuon]/I").c_str());
+      tree->Branch((name+"Muon_innerTrack_normChi2").c_str()          ,Muon_innerTrack_normChi2           ,(name+"Muon_innerTrack_normChi2["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_innerTrack_dxyVertPos").c_str()         ,Muon_innerTrack_dxyVertPos          ,(name+"Muon_innerTrack_dxyVertPos["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_innerTrack_dzVertPos").c_str()         ,Muon_innerTrack_dzVertPos          ,(name+"Muon_innerTrack_dzVertPos["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_bestTrack_dzVertPos").c_str()       ,Muon_bestTrack_dzVertPos        ,(name+"Muon_bestTrack_dzVertPos["+name+"nMuon]/F").c_str());
+      tree->Branch((name+"Muon_bestTrack_normChi2").c_str()      ,Muon_bestTrack_normChi2       ,(name+"Muon_bestTrack_normChi2["+name+"nMuon]/F").c_str());
+    }
+
+
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    void ReadTree(TTree *tree, std::string name="") {
+      if (name!="") name += ".";
+      
+      //--------------------------------------
+      // Isolation Variables
+      //--------------------------------------
+      tree->SetBranchAddress((name+"nMuon").c_str()         ,&nMuon        ) ;
+      tree->SetBranchAddress((name+"Muon_trkIso").c_str()   ,Muon_trkIso   ) ;
+      tree->SetBranchAddress((name+"Muon_trackerIsoSumPT").c_str()   ,Muon_trackerIsoSumPT   ) ;
+      tree->SetBranchAddress((name+"Muon_ecalIso").c_str()   ,Muon_ecalIso   ) ;
+      tree->SetBranchAddress((name+"Muon_hcalIso").c_str()  ,Muon_hcalIso  ) ;
+      tree->SetBranchAddress((name+"Muon_hoIso").c_str()  ,Muon_hoIso  ) ;
+      tree->SetBranchAddress((name+"Muon_ecalVetoIso").c_str() ,Muon_ecalVetoIso ) ;
+      tree->SetBranchAddress((name+"Muon_hcalVetoIso").c_str() ,Muon_hcalVetoIso ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor03chargedhadron").c_str()     ,Muon_pfisor03chargedhadron     ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor03chargedparticle").c_str()   ,Muon_pfisor03chargedparticle   ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor03neutralhadron").c_str()       ,Muon_pfisor03neutralhadron       ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor03photon").c_str()      ,Muon_pfisor03photon      ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor03neutralhadronht").c_str()      ,Muon_pfisor03neutralhadronht      ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor03photonht").c_str()    ,Muon_pfisor03photonht    ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor03pu").c_str()	    ,Muon_pfisor03pu	   ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor04chargedhadron").c_str()     ,Muon_pfisor04chargedhadron     ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor04chargedparticle").c_str()   ,Muon_pfisor04chargedparticle   ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor04neutralhadron").c_str()       ,Muon_pfisor04neutralhadron       ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor04photon").c_str()      ,Muon_pfisor04photon      ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor04neutralhadronht").c_str()      ,Muon_pfisor04neutralhadronht      ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor04photonht").c_str()    ,Muon_pfisor04photonht    ) ;
+      tree->SetBranchAddress((name+"Muon_pfisor04pu").c_str()	    ,Muon_pfisor04pu	   ) ;
+      //-----------------------------------
+      // ID Variables
+      //-----------------------------------
+      tree->SetBranchAddress((name+"Muon_isPF").c_str()     ,Muon_isPF     ) ;
+      tree->SetBranchAddress((name+"Muon_isGlobal").c_str() ,Muon_isGlobal ) ;
+      tree->SetBranchAddress((name+"Muon_isTracker").c_str()    ,Muon_isTracker    ) ;
+      tree->SetBranchAddress((name+"Muon_isGood").c_str()       ,Muon_isGood       ) ;
+      tree->SetBranchAddress((name+"Muon_isHighPt").c_str()  ,Muon_isHighPt  ) ;
+      tree->SetBranchAddress((name+"Muon_nTrackLayers").c_str()     ,Muon_nTrackLayers     ) ;
+      tree->SetBranchAddress((name+"Muon_nPixelLayers").c_str()    ,Muon_nPixelLayers    ) ;
+      tree->SetBranchAddress((name+"Muon_nPixelHits").c_str()   ,Muon_nPixelHits   ) ;
+      tree->SetBranchAddress((name+"Muon_nValidHits").c_str()    ,Muon_nValidHits    ) ;
+      tree->SetBranchAddress((name+"Muon_nMatchedStations").c_str() ,Muon_nMatchedStations ) ;
+      tree->SetBranchAddress((name+"Muon_innerTrack_normChi2").c_str()            ,Muon_innerTrack_normChi2            ) ;
+      tree->SetBranchAddress((name+"Muon_innerTrack_dxyVertPos").c_str()      ,Muon_innerTrack_dxyVertPos       ) ;
+      tree->SetBranchAddress((name+"Muon_innerTrack_dzVertPos").c_str()          ,Muon_innerTrack_dzVertPos           ) ;
+      tree->SetBranchAddress((name+"Muon_bestTrack_normChi2").c_str()         ,Muon_bestTrack_normChi2          ) ;
+    }
+
+};
+
+#endif

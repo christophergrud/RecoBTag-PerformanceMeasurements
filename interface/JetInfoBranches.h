@@ -5,7 +5,7 @@
 
 const UInt_t nMaxJets_ = 10000;
 const UInt_t nMaxTrk_  = 100000;
-const UInt_t nMaxMuons_= 10000;
+const UInt_t nMaxMuons_ = 100000;
 const UInt_t nMaxElectrons_= 10000;
 const UInt_t nMaxSVs_= 10000;
 
