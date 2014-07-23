@@ -137,6 +137,8 @@ BTagAnalyzer::BTagAnalyzer(const edm::ParameterSet& iConfig):
   ttbarTriggerPathNames_   = iConfig.getParameter<std::vector<std::string> >("TTbarTriggerPathNames");
   PFJet80TriggerPathNames_ = iConfig.getParameter<std::vector<std::string> >("PFJet80TriggerPathNames");
 
+  trackTags_              = iConfig.getParameter<edm::InputTag>( "generalTracks");
+
   ///////////////
   // TTree
 
@@ -296,6 +298,7 @@ void BTagAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
 //  LeptonInfo.nGenHiggs = 0;
 //  LeptonInfo.nGenW     = 0;
   LeptonInfo.nGenPart  = 0;
+  LeptonInfo.nTrk = 0;
 
 //$$
   bool AreBHadrons = false;
@@ -959,6 +962,32 @@ void BTagAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
 
       ++LeptonInfo.nMu; 
    }
+  }
+
+  //------------------------------------------------------
+  // Track Info
+  //------------------------------------------------------
+  using reco::TrackCollection;
+  
+  edm::Handle<View<reco::Track> > tracks;
+  iEvent.getByLabel(trackTags_ , tracks);
+  std::cout << "trk size=" << tracks->size() << std::endl;
+  for(View<reco::Track>::const_iterator itTrack = tracks->begin(); itTrack != tracks->end(); ++itTrack) {
+
+    LeptonInfo.Trk_d0[LeptonInfo.nTrk]       = itTrack->dxy((*primaryVertex)[0].position());
+    LeptonInfo.Trk_d0Error[LeptonInfo.nTrk]  = itTrack->dxyError();
+    LeptonInfo.Trk_dz[LeptonInfo.nTrk]       = itTrack->dz((*primaryVertex)[0].position());  
+    LeptonInfo.Trk_dzError[LeptonInfo.nTrk]  = itTrack->dzError();
+    LeptonInfo.Trk_p[LeptonInfo.nTrk]        = itTrack->p();
+    LeptonInfo.Trk_pt[LeptonInfo.nTrk]       = itTrack->pt();
+    LeptonInfo.Trk_eta[LeptonInfo.nTrk]      = itTrack->eta();
+    LeptonInfo.Trk_phi[LeptonInfo.nTrk]      = itTrack->phi();
+    LeptonInfo.Trk_chi2[LeptonInfo.nTrk]     = itTrack->chi2();
+    LeptonInfo.Trk_charge[LeptonInfo.nTrk]   = itTrack->charge();
+    LeptonInfo.Trk_ndof[LeptonInfo.nTrk]     = itTrack->ndof();
+    
+    ++LeptonInfo.nTrk;
+  
   }
 
   //------------------------------------------------------

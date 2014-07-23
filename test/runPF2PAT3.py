@@ -141,7 +141,109 @@ process.source = cms.Source("PoolSource",
 #        'file:/cms/data23/grud/CMSSW_5_3_9/src/test/bHiggs/res/TestHiggs_py_GEN_SIM_DIGI_L1_DIGI2RAW_RAW2DIGI_RECO_55_1_a7T.root'
 #         'file:/cms/data23/grud/CMSSW_5_3_18/src/TestHiggs_py_GEN_SIM_DIGI_L1_DIGI2RAW_RAW2DIGI_RECO.root'
 #       'file:/cms/data23/grud/CMSSW_5_3_18/src/bHiggs/res/TestHiggs_py_GEN_SIM_DIGI_L1_DIGI2RAW_RAW2DIGI_RECO_99_1_u5k.root'
-        'file:/cms/data23/grud/CMSSW_5_3_18/src/step2_DIGI_L1_DIGI2RAW_RAW2DIGI_RECO.root'
+#        'file:/cms/data23/grud/CMSSW_5_3_18/src/step2_DIGI_L1_DIGI2RAW_RAW2DIGI_RECO.root'
+#	'/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_100_1_gKP.root'
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_100_1_gKP.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_10_1_01a.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_11_1_0JQ.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_12_1_B9r.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_13_1_1K9.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_14_1_wsg.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_15_1_Ddl.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_16_1_9zf.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_17_1_cXK.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_18_1_V8Q.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_19_1_6zJ.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_1_1_52e.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_20_1_5LG.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_21_1_02J.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_22_1_dBC.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_23_1_wVN.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_24_1_BGZ.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_25_1_lR9.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_26_1_Ok3.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_27_1_lBD.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_28_1_8eB.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_29_1_t5u.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_2_1_xdj.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_30_1_XYt.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_31_1_7Ze.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_32_1_k5Y.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_33_1_tEm.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_34_1_WnG.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_35_1_ePU.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_36_1_eDC.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_37_1_b2A.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_38_1_i8C.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_39_1_OA2.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_3_1_Y4c.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_40_1_SVO.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_41_1_0yK.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_42_1_Cg5.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_43_1_NBp.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_44_1_qpT.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_45_1_6UV.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_46_1_TdE.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_47_1_Wap.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_48_1_hTR.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_49_1_Dqr.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_4_1_Gib.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_50_1_K3h.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_51_1_8hZ.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_52_1_hnD.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_53_1_byF.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_54_1_W5l.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_55_1_n0C.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_56_1_6jF.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_57_1_rex.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_58_1_OhJ.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_59_1_7vA.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_5_1_cRp.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_60_1_yoS.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_61_1_1kC.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_62_1_hMy.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_63_1_znO.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_64_1_Byw.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_65_1_IND.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_66_1_7TA.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_67_1_M3o.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_68_1_v0c.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_69_1_h6B.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_6_1_jqB.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_70_1_UOv.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_71_1_6kK.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_72_1_FQQ.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_73_1_uqX.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_74_1_aC8.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_75_1_K1J.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_76_1_uq5.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_77_1_0KB.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_78_1_wBk.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_79_1_L6z.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_7_1_sT9.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_80_1_X5a.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_81_1_BnT.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_82_1_umo.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_83_1_D3M.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_84_1_0yn.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_85_1_LMo.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_86_1_gau.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_87_1_RQb.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_88_1_eEg.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_89_1_qvZ.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_8_1_1wF.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_90_1_QNx.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_91_1_eZz.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_92_1_v14.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_93_1_DQM.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_94_1_ecC.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_95_1_nmN.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_96_1_DA2.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_97_1_k8y.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_98_1_28v.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_99_1_Mbe.root',
+    '/store/user/cgrud/HiggsTo4Mu_M-125-10_TuneZ2star_8TeV-pythia6/Summer12_DR53X-PU_S10_START53_V27/220d40fbdddd6cac91a1e3c002f91223/STEP2_RAW2DIGI_L1Reco_RECO_VALIDATION_DQM_PU_9_1_5Nm.root'
+
   )
 )
 
@@ -152,7 +254,7 @@ if options.runOnData:
     ]
 
 #-------------------------------------
-outFilename = string.replace(options.outFilename,'.root','') + '_mcISTHEREPILEUP.root'
+outFilename = string.replace(options.outFilename,'.root','') + '_mc.root'
 if options.runOnData :
     outFilename = string.replace(options.outFilename,'.root','') + '_data.root'
 
@@ -534,7 +636,7 @@ process.primaryVertexFilter = cms.EDFilter('VertexSelector',
 process.load("RecoBTag.PerformanceMeasurements.BTagAnalyzer_cff")
 process.btagana.use_selected_tracks   = True  ## False if you want to run on all tracks : used for commissioning studies
 process.btagana.useTrackHistory       = False ## Can only be used with GEN-SIM-RECODEBUG files
-process.btagana.produceJetProbaTree   = False ## True if you want to keep track and SV info! : used for commissioning studies
+process.btagana.produceJetProbaTree   = True ## True if you want to keep track and SV info! : used for commissioning studies
 process.btagana.producePtRelTemplate  = False  ## True for performance studies
 process.btagana.primaryVertexColl     = cms.InputTag('goodOfflinePrimaryVertices')
 process.btagana.Jets                  = cms.InputTag('selectedPatJets'+postfix)

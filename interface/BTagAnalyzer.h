@@ -255,6 +255,8 @@ class BTagAnalyzer : public edm::EDAnalyzer
 
     edm::InputTag primaryVertexColl_;
 
+    edm::InputTag trackTags_;
+
     bool useTrackHistory_;
     TFile*  rootFile_;
     double minJetPt_;
